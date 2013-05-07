@@ -1,6 +1,8 @@
 feelings
 ========
 
+![feelings](https://raw.github.com/glebb/feelings/master/feelings.png)
+
 feelings is a simple tool for gathering information about the feelings of people. You can use the data it gathers 
 to draw a happiness index for example. I use it daily (part of our daily meetings) with my distributed team, so I get an overall view on what's going on in our team.
 
