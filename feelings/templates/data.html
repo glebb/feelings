@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<title>Data</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+	<h1>Data</h1>
+	<table style="width: 100%;">
+		<tr>
+			<th>date</th>
+			<th>feeling</th>
+			<th>comment</th>
+			<th>category</th>
+		</tr>
+		{% for row in data %}
+		<tr>
+			<td class="centered"> {{row['date']}}</td>	
+			<td class="centered"> {{row['feeling']}}</td>
+			<td class="centered"> {{row['comment']}}</td>					
+			<td class="centered"> {{row['category']}}</td>
+		</tr>	
+		{% endfor %}
+	</table>
+</body>
+</html>
