@@ -16,7 +16,6 @@ def clear_data():
 @app.route('/show_data')
 def show_data():
     cat = request.args.get('category')
-    print cat
     query = "select * from feelings"
     args = []
     if cat:
@@ -29,7 +28,6 @@ def show_data():
 @app.route('/show_avg')
 def show_avg():
     cat = request.args.get('category')
-    print cat
     query = "select date, AVG(feeling) as feelingavg, group_concat(comment) as comments, count(*) as votes from feelings"
     args = []
     if cat:
