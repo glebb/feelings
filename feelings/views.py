@@ -52,5 +52,8 @@ def add_entry():
 
 @app.route('/')
 def index():
-    return render_template('index.html', cat='test')
+    category = request.args.get('category')
+    if not category:
+        category = 'test'
+    return render_template('index.html', cat=category)
 

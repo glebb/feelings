@@ -14,8 +14,8 @@ Then you can simply start the development server, or run it via Apache or by som
 Check Flask documentation for more information.
 
 Basics:
-  * feelings stores everything to a single table. If you want to use it with multiple teams, you can define a category, which can be set as a hidden field in the html form. The most easiest solution is to create a custom view, which sets the category. See views.py (e.g. return render_template('index.html', cat='team2'))
-  * To display results in a web page, use /show_data and /show_avg. To display results for specific category, add GET parameter (e.g. /show_avg?category=team2). Currently it only shows numbers (see TODO). 
+  * feelings stores everything to a single table. If you want to use it with multiple teams, you can define a category using a GET paramerter. Just append e.g. /?category=team2 at the end of the url in the main page.
+  * To display results in a web page, use /show_data and /show_avg. To display results for a specific team/category, add GET parameter (e.g. /show_avg?category=team2). Currently it only shows numbers (see TODO). 
 
 TODO:
   * Draw graphs based on gathered data.
