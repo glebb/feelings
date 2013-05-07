@@ -15,8 +15,30 @@ def clear_data():
     
 @app.route('/show_data')
 def show_data():
-    resp = database.query_db('select * from feelings')
+    cat = request.args.get('category')
+    print cat
+    query = "select * from feelings"
+    args = []
+    if cat:
+        query = query + " WHERE category LIKE ?"
+        args.append(cat)
+    query = query + " order by date"
+    resp = database.query_db(query, args)
     return render_template('data.html', data=resp)
+
+@app.route('/show_avg')
+def show_avg():
+    cat = request.args.get('category')
+    print cat
+    query = "select date, AVG(feeling) as feelingavg, group_concat(comment) as comments, count(*) as votes from feelings"
+    args = []
+    if cat:
+        query = query + " WHERE category LIKE ?"
+        args.append(cat)
+    query = query + " group by date order by date"
+    resp = database.query_db(query, args)
+    return render_template('data_avg.html', data=resp)
+    
 
 @app.route('/thanks', methods=['POST'])
 def add_entry():
@@ -33,3 +55,4 @@ def add_entry():
 @app.route('/')
 def index():
     return render_template('index.html', cat='test')
+
