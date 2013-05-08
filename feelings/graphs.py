@@ -10,6 +10,7 @@ def create_graph(data, pic_name):
         X.append(temp)
 	Y = [row['feelingavg']for row in data]
     if (X and Y):
+        pyplot.clf()
         pyplot.plot(X, Y)
         pyplot.title( 'Graph' )
         pyplot.xlabel( 'Date' )
