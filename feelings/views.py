@@ -54,5 +54,5 @@ def index():
     category = request.args.get('category')
     if not category:
         category = 'test'
-    return render_template('index.html', cat=category)
+    return render_template('index.html', cat=category, today=datetime.date.today().strftime('%d.%m.%Y'))
 

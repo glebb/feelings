@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
+	<h3>{{today}}</h3>
   <h1>How is it going?</h1>
 	<form action="{{ url_for('add_entry') }}" method="post">
 		<div class="centered">
@@ -26,11 +27,11 @@
 			</div>
 			<br style="clear: left;" />
 		</div>
+
 	<p>
 		<label for="comment">Comment:</label> <br />
 		<textarea id="comment" name="comment" cols="74" rows="3"></textarea>
 	</p>
-
 	<p>
 		<input type="hidden" name="category" value={{cat}}>
 	<input type="submit" value="SUBMIT" />
