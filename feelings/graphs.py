@@ -17,5 +17,6 @@ def create_graph(data, pic_name):
         pyplot.ylabel( 'Feeling' )
         pyplot.gcf().autofmt_xdate()
         pyplot.gca().set_xticks(X)
+        pyplot.ylim([0,2])
         pyplot.gca().set_xticklabels([date.strftime("%d.%m.") for date in X])
         pyplot.savefig(os.path.dirname(os.path.abspath(__file__))+'/static/'+pic_name )
