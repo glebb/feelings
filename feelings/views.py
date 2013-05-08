@@ -5,7 +5,6 @@ import datetime
 
 from feelings import app
 from feelings import database
-from feelings import custom_views
 
 @app.route('/_clear_data')
 def clear_data():
