@@ -17,7 +17,7 @@
 		{% for row in data %}
 		<tr>
 			<td class="centered"> {{row['date']}}</td>	
-			<td class="centered"> {{row['feelingavg']}}</td>
+			<td class="centered"> {{row['feelingavg'].__str__().replace('.', ',')}}</td>
 			<td class="centered"> {{row['votes']}}</td>			
 			<td class="centered"> {{row['comments']}}</td>					
 		</tr>	
