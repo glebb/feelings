@@ -1,3 +1,5 @@
+import matplotlib as mpl
+mpl.use('Agg')
 from matplotlib import pyplot
 from matplotlib.dates import date2num
 from datetime import datetime, timedelta
