@@ -6,6 +6,8 @@ import datetime
 from feelings import app
 from feelings import database
 
+from graphs import create_graph
+
 @app.after_request
 def add_header(response):
     """
@@ -37,14 +39,18 @@ def show_data():
 @app.route('/show_avg')
 def show_avg():
     cat = request.args.get('category')
+    pic_name = "all"
     query = "select date, AVG(feeling) as feelingavg, group_concat(comment) as comments, count(*) as votes from feelings"
     args = []
     if cat:
         query = query + " WHERE category LIKE ?"
         args.append(cat)
+        pic_name = cat
+    pic_name = pic_name + ".png"
     query = query + " group by date order by date"
     resp = database.query_db(query, args)
-    return render_template('data_avg.html', data=resp)
+    create_graph(resp, pic_name)
+    return render_template('data_avg.html', data=resp, pic_name=pic_name)
     
 
 @app.route('/thanks', methods=['POST'])
