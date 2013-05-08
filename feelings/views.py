@@ -63,7 +63,7 @@ def add_entry():
     
     database.query_db(query, args)
     database.save_db()
-    return render_template('thanks.html')
+    return render_template('thanks.html', category=request.form['category'])
 
 @app.route('/')
 def index():
