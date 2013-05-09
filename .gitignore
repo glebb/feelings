@@ -1,2 +1,2 @@
 *.pyc
-feelings/static/graphs
+feelings/static/graphs/*.png
