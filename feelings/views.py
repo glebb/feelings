@@ -1,6 +1,8 @@
 from flask import render_template
 from flask import jsonify
 from flask import request
+from flask import send_from_directory
+import os
 import datetime
 
 from feelings import app
@@ -71,4 +73,9 @@ def index():
     if not category:
         category = 'test'
     return render_template('index.html', cat=category, today=datetime.date.today().strftime('%d.%m.%Y'))
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+            'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
