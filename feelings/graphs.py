@@ -22,3 +22,11 @@ def create_graph(data, pic_name):
         pyplot.ylim([0,2])
         pyplot.gca().set_xticklabels([date.strftime("%d.%m.") for date in X])
         pyplot.savefig(os.path.dirname(os.path.abspath(__file__))+'/static/'+pic_name )
+
+def generate_filename(cat):
+    if cat:
+        pic_name = cat
+    else:
+        pic_name = "all"
+    return 'graphs/' + pic_name + ".png"
+    

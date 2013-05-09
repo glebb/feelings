@@ -26,3 +26,12 @@ def query_db(query, args=(), one=False):
 def save_db():
     g.db.commit()
 
+def get_averages(cat):
+    query = "select date, AVG(feeling) as feelingavg, group_concat(comment) as comments, count(*) as votes from feelings"
+    args = []
+    if cat:
+        query = query + " WHERE category LIKE ?"
+        args.append(cat)
+    query = query + " group by date order by date"
+    return query_db(query, args)
+    

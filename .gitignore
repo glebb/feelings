@@ -1,2 +1,2 @@
 *.pyc
-*custom_views.py
+feelings/static/graphs

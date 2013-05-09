@@ -13,6 +13,6 @@ After installing the requirements you are ready to go. Execute "python tornado_s
 
 Basics:
   * feelings stores everything to a single table (feelings.sqlite). You can access it by any means, and process the data as you please. 
-  * feelings provides 3 views: the main view (/) asks how you are doing today. By submitting the form the answers are saved to the db. /show_avg displays a chart and averages by day, and is no doubt the most useful view for those interested in data. /show_data displays all the individual answers from the database.
+  * feelings provides following views: the main view (/) asks how you are doing today. By submitting the form the answer gets saved to the db. /show_avg displays averages by day including comments. /show_data displays all the individual answers from the database. /show_graph displays a graph of averages.
   * If you want to use feelings with multiple teams, you can define a category using a GET paramerter. Just append ?category=something at the end of the urls. E.g. http://localhost:8080/?category=team1 or http://localhost:8080/show_avg?category=team2 
   * TIP: you can use Excel to import data (set feelings /show_avg url as web data source and select the table with data) and to draw (nicer) graphs.
