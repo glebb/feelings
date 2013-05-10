@@ -2,6 +2,7 @@ from flask import render_template
 from flask import jsonify
 from flask import request
 from flask import send_from_directory
+from flask import make_response
 import os
 import datetime
 
@@ -9,7 +10,8 @@ from feelings import app
 from feelings import database
 
 from graphs import create_graph
-from graphs import generate_filename
+
+DEFAULT_CATEGORY = 'test'
 
 @app.after_request
 def add_header(response):
@@ -46,12 +48,12 @@ def show_avg():
 
 @app.route('/show_graph')
 def show_graph():
-    cat = request.args.get('category')
-    resp = database.get_averages(cat)
-    pic_name = generate_filename(cat)
-    create_graph(resp, pic_name)
-    return render_template('data_graph.html', pic_name=pic_name, data=resp)
-    
+    category = request.args.get('category')
+    resp = database.get_averages(category)
+    if not category:
+        category = DEFAULT_CATEGORY
+    return render_template('data_graph.html', data=resp, category=category)
+
 
 @app.route('/thanks', methods=['POST'])
 def add_entry():
@@ -69,11 +71,23 @@ def add_entry():
 def index():
     category = request.args.get('category')
     if not category:
-        category = 'test'
+        category = DEFAULT_CATEGORY
     return render_template('index.html', cat=category, today=datetime.date.today().strftime('%d.%m.%Y'))
+
+@app.route("/<category>/graph.png")
+def simple(category):
+    cat = category
+    resp = database.get_averages(cat)
+    png = create_graph(resp, cat)
+    if png:
+        response=make_response(png)
+        response.headers['Content-Type'] = 'image/png'
+        return response
+    else:
+        return "No data for: " + cat
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
             'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
+        

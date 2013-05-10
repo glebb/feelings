@@ -1,32 +1,27 @@
 import matplotlib as mpl
 mpl.use('Agg')
+
 from matplotlib import pyplot
 from matplotlib.dates import date2num
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 from datetime import datetime, timedelta
-import os
+import StringIO
 
-def create_graph(data, pic_name):
-    X=[]
-    for row in data:
-        temp = datetime.strptime(row['date'], '%Y-%m-%d')
-        X.append(temp)
-	Y = [row['feelingavg']for row in data]
-    if (X and Y):
+def create_graph(data, cat):
+    X = [datetime.strptime(row['date'], '%Y-%m-%d') for row in data]
+    Y = [row['feelingavg']for row in data]
+    if (len(X) > 0 and len(Y) > 0):
         pyplot.clf()
         pyplot.plot(X, Y)
-        pyplot.title( 'Graph' )
+        pyplot.title(cat)
         pyplot.xlabel( 'Date' )
         pyplot.ylabel( 'Feeling' )
         pyplot.gcf().autofmt_xdate()
         pyplot.gca().set_xticks(X)
         pyplot.ylim([0,2])
         pyplot.gca().set_xticklabels([date.strftime("%d.%m.") for date in X])
-        pyplot.savefig(os.path.dirname(os.path.abspath(__file__))+'/static/'+pic_name )
-
-def generate_filename(cat):
-    if cat:
-        pic_name = cat
-    else:
-        pic_name = "all"
-    return 'graphs/' + pic_name + ".png"
-    
+        canvas=FigureCanvas(pyplot.gcf())
+        png_output = StringIO.StringIO()
+        canvas.print_png(png_output)
+        return png_output.getvalue() 
