@@ -50,7 +50,7 @@ def show_graph():
     resp = database.get_averages(cat)
     pic_name = generate_filename(cat)
     create_graph(resp, pic_name)
-    return render_template('data_graph.html', pic_name=pic_name)
+    return render_template('data_graph.html', pic_name=pic_name, data=resp)
     
 
 @app.route('/thanks', methods=['POST'])
