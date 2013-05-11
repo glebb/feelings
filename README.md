@@ -5,6 +5,8 @@ feelings
 
 feelings is a simple tool for gathering information about feelings of people. I use it daily (part of our daily meetings) with my distributed team. After you have used it for a while, you can identify trends and use the information e.g. in retrospectives.
 
+Live demo: http://displayofpatience.com:8080/
+
 feelings is written in Python, and it saves the data to a simple sqlite db file. It uses http://flask.pocoo.org for server side stuff.
 
 To install it, clone the repo and first install requirements (requirements.txt). Depending on your platform, you might need to install some components manually. For example on OSX you need to install libpng (use brew). On windows you might want to install numpy and matplotlib from binary installers, if pip fails.
