@@ -7,6 +7,22 @@
 </head>
 <body>
 	<h1>Averages</h1>
-	<p>	<img src="{{url_for('static', filename=pic_name)}}" alt="graph" /> </p>
+	<p>	<img src="/{{category}}/graph.png" alt="graph" /> </p>
+	<table style="width: 100%;">
+		<tr>
+			<th>date</th>
+			<th>avg</th>
+			<th>total votes</th>
+			<th>comments</th>
+		</tr>
+		{% for row in data %}
+		<tr>
+			<td class="centered"> {{row['date']}}</td>	
+			<td class="centered"> {{row['feelingavg'].__str__().replace('.', ',')}}</td>
+			<td class="centered"> {{row['votes']}}</td>			
+			<td class="centered"> {{row['comments']}}</td>					
+		</tr>	
+		{% endfor %}
+	</table>  
 </body>
 </html>
