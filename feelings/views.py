@@ -41,6 +41,26 @@ def show_data():
     resp = database.query_db(query, args)
     return render_template('data.html', data=resp)
 
+@app.route('/json_data')
+def show_data():
+    cat = request.args.get('category')
+    query = "select date, group_concat(feeling) as feelings from feelings"
+    args = []
+    if cat:
+        query = query + " WHERE category LIKE ?"
+        args.append(cat)
+    query = query + " group by date order by date ASC, feeling DESC"
+    resp = database.query_db(query, args)
+    for r in resp:
+        r['feelings'] = r['feelings'].split(',') 
+    return jsonify(data=resp)
+
+    
+@app.route('/nikoniko')
+def nikoniko():
+    return render_template('nikoniko.html')
+
+
 @app.route('/show_avg')
 def show_avg():
     resp = database.get_averages(request.args.get('category'))
