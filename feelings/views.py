@@ -63,8 +63,7 @@ def json_data():
     
 @app.route('/nikoniko')
 def nikoniko():
-    return render_template('nikoniko.html')
-
+    return render_template('nikoniko.html', category = request.args.get('category'))
 
 @app.route('/show_avg')
 def show_avg():
