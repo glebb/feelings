@@ -10,7 +10,8 @@
 </head>
 <body>
 	<h1>Niko Niko Calendar</h1>
-  <canvas id="myCanvas" width="1000" height="400">
+  <p>Shows color coded feelings for the last 20 days.</p>
+  <canvas id="myCanvas" width="1000px" height="700px">
   </canvas>  
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script>window.jQuery || document.write('<script src="{{
@@ -23,9 +24,18 @@
         
         $.getJSON($SCRIPT_ROOT + '/json_data', function(data) {
           var x = 0;
+          var y = 0;
+          var color_padding = 2;
+          var date_padding = 6;
+          var feeling_size = 30;
           $.each(data['data'], function(index, val) {
-              //$('body').append('<p>'+val['date']+'</p>');
-              var y = 0;
+              x = 0;
+              var date_text = val['date']
+              ctx.font="14px Arial";
+              ctx.fillStyle="black";
+              ctx.fillText(date_text,x,y+feeling_size/2);
+              var metrics = ctx.measureText(date_text);
+              x += metrics.width;
               $.each(val['feelings'], function(index2, val2) {
                 if (val2 == "0")
                   ctx.fillStyle="red";
@@ -33,10 +43,10 @@
                   ctx.fillStyle="yellow";
                 else if (val2 == "2")
                   ctx.fillStyle="green";
-                ctx.fillRect(x,y,30,30);
-                y += 32;
+                ctx.fillRect(x+date_padding,y,feeling_size,feeling_size);
+                x += feeling_size + color_padding;                
               });
-              x += 32;                
+              y += feeling_size + color_padding;
           });            
         });
       });
