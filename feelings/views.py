@@ -54,6 +54,7 @@ def json_data():
     for row in resp:
         row['feelings'] = row['feelings'].split(',')
         row['feelings'].sort() 
+    resp.pop()
     return jsonify(data = resp[-20:])
 
     
