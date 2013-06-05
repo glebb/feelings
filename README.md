@@ -3,6 +3,8 @@ feelings
 
 ![feelings](https://raw.github.com/glebb/feelings/master/feelings.png)
 ![nikoniko](https://raw.github.com/glebb/feelings/master/nikoniko.png)
+![averages](https://raw.github.com/glebb/feelings/master/averages.png)
+
 
 feelings is a simple tool for gathering information about feelings of people. I use it daily (part of our daily meetings) with my distributed team. After you have used it for a while, you can identify trends and use the information e.g. in retrospectives.
 
