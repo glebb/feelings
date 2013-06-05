@@ -9,7 +9,7 @@ import datetime
 from feelings import app
 from feelings import database
 
-from graphs import create_graph
+from feelings.graphs import create_graph
 
 DEFAULT_CATEGORY = 'test'
 
@@ -39,7 +39,7 @@ def show_data():
         args.append(cat)
     query = query + " order by date"
     resp = database.query_db(query, args)
-    return render_template('data.html', data=resp)
+    return render_template('data.html', data = resp)
 
 @app.route('/json_data')
 def json_data():
@@ -51,10 +51,10 @@ def json_data():
     args.append(cat)
     query = query + " group by date order by date ASC"
     resp = database.query_db(query, args)
-    for r in resp:
-        r['feelings'] = r['feelings'].split(',')
-        r['feelings'].sort() 
-    return jsonify(data=resp[-20:])
+    for row in resp:
+        row['feelings'] = row['feelings'].split(',')
+        row['feelings'].sort() 
+    return jsonify(data = resp[-20:])
 
     
 @app.route('/nikoniko')
@@ -65,7 +65,7 @@ def nikoniko():
 @app.route('/show_avg')
 def show_avg():
     resp = database.get_averages(request.args.get('category'))
-    return render_template('data_avg.html', data=resp)
+    return render_template('data_avg.html', data = resp)
 
 @app.route('/show_graph')
 def show_graph():
@@ -73,10 +73,10 @@ def show_graph():
     resp = database.get_averages(category)
     if not category:
         category = DEFAULT_CATEGORY
-    return render_template('data_graph.html', data=resp, category=category)
+    return render_template('data_graph.html', data = resp, category = category)
 
 
-@app.route('/thanks', methods=['POST'])
+@app.route('/thanks', methods = ['POST'])
 def add_entry():
     today = datetime.date.today()
     query = 'insert into feelings (date, feeling, category, comment) values (?, ?, ?, ?)'
@@ -86,14 +86,14 @@ def add_entry():
     
     database.query_db(query, args)
     database.save_db()
-    return render_template('thanks.html', category=request.form['category'])
+    return render_template('thanks.html', category = request.form['category'])
 
 @app.route('/')
 def index():
     category = request.args.get('category')
     if not category:
         category = DEFAULT_CATEGORY
-    return render_template('index.html', cat=category, today=datetime.date.today().strftime('%d.%m.%Y'))
+    return render_template('index.html', cat = category, today = datetime.date.today().strftime('%d.%m.%Y'))
 
 @app.route("/<category>/graph.png")
 def simple(category):
@@ -101,7 +101,7 @@ def simple(category):
     resp = database.get_averages(cat)
     png = create_graph(resp, cat)
     if png:
-        response=make_response(png)
+        response = make_response(png)
         response.headers['Content-Type'] = 'image/png'
         return response
     else:
@@ -110,5 +110,5 @@ def simple(category):
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
-            'favicon.ico', mimetype='image/vnd.microsoft.icon')
+            'favicon.ico', mimetype = 'image/vnd.microsoft.icon')
         

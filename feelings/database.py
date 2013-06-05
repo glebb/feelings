@@ -19,15 +19,16 @@ def teardown_request(exception):
         
 def query_db(query, args=(), one=False):
     cur = g.db.execute(query, args)
-    rv = [dict((cur.description[idx][0], value)
+    r_value = [dict((cur.description[idx][0], value)
                for idx, value in enumerate(row)) for row in cur.fetchall()]
-    return (rv[0] if rv else None) if one else rv        
+    return (r_value[0] if r_value else None) if one else r_value        
 
 def save_db():
     g.db.commit()
 
 def get_averages(cat):
-    query = "select date, AVG(feeling) as feelingavg, group_concat(comment) as comments, count(*) as votes from feelings"
+    query = "select date, AVG(feeling) as feelingavg, group_concat(comment) \
+        as comments, count(*) as votes from feelings"
     args = []
     if cat:
         query = query + " WHERE category LIKE ?"

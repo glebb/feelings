@@ -3,6 +3,6 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from feelings import app
 
-http_server = HTTPServer(WSGIContainer(app))
-http_server.listen(8080)
+HTTP_SERVER = HTTPServer(WSGIContainer(app))
+HTTP_SERVER.listen(8080)
 IOLoop.instance().start()
