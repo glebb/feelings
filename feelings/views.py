@@ -44,11 +44,12 @@ def show_data():
 @app.route('/json_data')
 def json_data():
     cat = request.args.get('category')
-    query = "select date, group_concat(feeling) as feelings from feelings"
+    if not cat:
+        return 'This page does not exist', 404
+    query = "select date, group_concat(feeling) as feelings from (SELECT * FROM feelings WHERE category LIKE ? ORDER BY rowid DESC LIMIT 20) sub WHERE category LIKE ?"
     args = []
-    if cat:
-        query = query + " WHERE category LIKE ?"
-        args.append(cat)
+    args.append(cat)
+    args.append(cat)
     query = query + " group by date order by date ASC"
     resp = database.query_db(query, args)
     for r in resp:
