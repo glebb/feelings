@@ -21,7 +21,7 @@
         var c=document.getElementById("myCanvas");
         var ctx=c.getContext("2d");
         
-        $.getJSON($SCRIPT_ROOT + '/json_data', function(data) {
+        $.getJSON($SCRIPT_ROOT + '/json_data?category={{request.args['category']}}', function(data) {
           var x = 0;
           var y = 0;
           var color_padding = 2;

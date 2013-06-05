@@ -49,10 +49,11 @@ def json_data():
     if cat:
         query = query + " WHERE category LIKE ?"
         args.append(cat)
-    query = query + " group by date order by date ASC, feeling DESC"
+    query = query + " group by date order by date ASC"
     resp = database.query_db(query, args)
     for r in resp:
-        r['feelings'] = r['feelings'].split(',') 
+        r['feelings'] = r['feelings'].split(',')
+        r['feelings'].sort() 
     return jsonify(data=resp)
 
     
