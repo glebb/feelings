@@ -12,6 +12,7 @@ from feelings import database
 from feelings.graphs import create_graph
 
 DEFAULT_CATEGORY = 'test'
+ALL = '_all_'
 
 @app.after_request
 def add_header(response):
@@ -29,7 +30,7 @@ def clear_data():
     database.save_db()
     return show_data()
     
-@app.route('/show_data')
+@app.route('/_show_data')
 def show_data():
     cat = request.args.get('category')
     query = "select * from feelings"
@@ -75,7 +76,7 @@ def show_graph():
     category = request.args.get('category')
     resp = database.get_averages(category)
     if not category:
-        category = DEFAULT_CATEGORY
+        category = ALL
     return render_template('data_graph.html', data = resp, category = category)
 
 
@@ -99,8 +100,10 @@ def index():
     return render_template('index.html', cat = category, today = datetime.date.today().strftime('%d.%m.%Y'))
 
 @app.route("/<category>/graph.png")
-def simple(category):
+def dynamic_graph(category):
     cat = category
+    if cat == ALL:
+        cat = None
     resp = database.get_averages(cat)
     png = create_graph(resp, cat)
     if png:

@@ -7,6 +7,8 @@ from datetime import datetime
 import StringIO
 
 def create_graph(data, cat):
+    if not cat:
+        cat = ""
     x_ax = [datetime.strptime(row['date'], '%Y-%m-%d') for row in data]
     y_ax = [row['feelingavg']for row in data]
     if (len(x_ax) > 0 and len(y_ax) > 0):

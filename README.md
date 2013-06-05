@@ -2,6 +2,7 @@ feelings
 ========
 
 ![feelings](https://raw.github.com/glebb/feelings/master/feelings.png)
+![nikoniko](https://raw.github.com/glebb/feelings/master/nikoniko.png)
 
 feelings is a simple tool for gathering information about feelings of people. I use it daily (part of our daily meetings) with my distributed team. After you have used it for a while, you can identify trends and use the information e.g. in retrospectives.
 
@@ -15,6 +16,6 @@ After installing the requirements you are ready to go. Execute "python tornado_s
 
 Basics:
   * feelings stores everything to a single table (feelings.sqlite). You can access it by any means, and process the data as you please. 
-  * feelings provides following views: the main view (/) asks how you are doing today. By submitting the form the answer gets saved to the db. /show_avg displays averages by day including comments. /show_data displays all the individual answers from the database. /show_graph displays a graph of averages.
-  * If you want to use feelings with multiple teams, you can define a category using a GET paramerter. Just append ?category=something at the end of the urls. E.g. http://localhost:8080/?category=team1 or http://localhost:8080/show_avg?category=team2 
+  * feelings web app provides following views: the main view (/) asks how you are doing today. By submitting the form the answer gets saved to the db. /show_avg displays averages by day including comments. /show_graph displays a graph of averages and /nikoniko shows a calendar view with individual answers color-coded day by day (excluding the last day, to provide sense of security for providing sensitive data)
+  * If you want to use feelings with multiple teams, you can define a category using a GET paramerter. Just append ?category=something at the end of the urls. E.g. http://localhost:8080/?category=team1 or http://localhost:8080/show_avg?category=team1 
   * TIP: you can use Excel to import data (set feelings /show_avg url as web data source and select the table with data) and to draw (nicer) graphs.
