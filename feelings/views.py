@@ -46,16 +46,15 @@ def json_data():
     cat = request.args.get('category')
     if not cat:
         return 'This page does not exist', 404
-    query = "select date, group_concat(feeling) as feelings from (SELECT * FROM feelings WHERE category LIKE ? ORDER BY rowid DESC LIMIT 20) sub WHERE category LIKE ?"
+    query = "select date, group_concat(feeling) as feelings from feelings WHERE category LIKE ?"
     args = []
-    args.append(cat)
     args.append(cat)
     query = query + " group by date order by date ASC"
     resp = database.query_db(query, args)
     for r in resp:
         r['feelings'] = r['feelings'].split(',')
         r['feelings'].sort() 
-    return jsonify(data=resp)
+    return jsonify(data=resp[-20:])
 
     
 @app.route('/nikoniko')
