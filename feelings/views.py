@@ -44,7 +44,7 @@ def show_data():
 @app.route('/json_data')
 def json_data():
     cat = request.args.get('category')
-    query = "select date, group_concat(feeling) as feelings from (SELECT * FROM feelings ORDER BY rowid DESC LIMIT 20) sub"
+    query = "select date, group_concat(feeling) as feelings from feelings"
     args = []
     if cat:
         query = query + " WHERE category LIKE ?"
