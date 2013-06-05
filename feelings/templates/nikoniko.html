@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>Niko Niko Calendar</h1>
-  <canvas id="myCanvas" width="1000" height="700">
+  <canvas id="nikonikocanvas" width="1000" height="700">
   </canvas>  
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script>window.jQuery || document.write('<script src="{{
@@ -18,8 +18,9 @@
     
     <script type=text/javascript>
       $(function() {
-        var c=document.getElementById("myCanvas");
+        var c=document.getElementById("nikonikocanvas");
         var ctx=c.getContext("2d");
+        ctx.font="14px Arial";
         
         $.getJSON($SCRIPT_ROOT + '/json_data?category={{request.args['category']}}', function(data) {
           var x = 0;
@@ -30,7 +31,6 @@
           $.each(data['data'], function(index, val) {
               x = 0;
               var date_text = val['date']
-              ctx.font="14px Arial";
               ctx.fillStyle="black";
               ctx.fillText(date_text,x,y+feeling_size/2);
               var metrics = ctx.measureText(date_text);
@@ -38,10 +38,12 @@
               $.each(val['feelings'], function(index2, val2) {
                 if (val2 == "0")
                   ctx.fillStyle="red";
-                if (val2 == "1")
+                else if  (val2 == "1")
                   ctx.fillStyle="yellow";
                 else if (val2 == "2")
                   ctx.fillStyle="green";
+                else
+                  ctx.fillStyle="blue";
                 ctx.fillRect(x+date_padding,y,feeling_size,feeling_size);
                 x += feeling_size + color_padding;                
               });
