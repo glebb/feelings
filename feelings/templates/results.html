@@ -1,28 +1,53 @@
 <!doctype html>
 <html>
 <head>
-<title>Niko niko calendar</title>
+<title>Feelings results</title>
 <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+<script type="text/javascript" src="{{
+    url_for('static', filename='jquery.js')}}"></script> 
+<script type="text/javascript" src="{{
+    url_for('static', filename='jquery.flot.js') }}"></script> 
+<script type="text/javascript" src="{{
+    url_for('static', filename='jquery.flot.time.js') }}"></script> 
+<script type="text/javascript" src="{{
+    url_for('static', filename='jquery.flot.canvas.js') }}"></script> 
 </head>
 <body>
-	<h1>Niko Niko Calendar</h1>
-  <canvas id="nikonikocanvas" width="1000" height="700">
-  </canvas>  
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-  <script>window.jQuery || document.write('<script src="{{
-    url_for('static', filename='jquery.js') }}">\x3C/script>')</script> 
-    
+	<h1>Results</h1>
+  <div id="my_graph" style="width:960px;height:300px"></div>
+  <p>
+  <canvas id="nikonikocanvas" width="1000" height="700"></canvas>  
+  </p>
+
     <script type=text/javascript>
       $(function() {
+        
+        // Graph
+        var series = []
+      	var options = {
+      	  canvas: true,
+      		xaxes: [ { mode: "time" } ],
+      		yaxes: [ { min: -0.5, max: 2.5 }
+        ]}        
+        
+        $.getJSON($SCRIPT_ROOT + '/json_graph_data?category={{request.args['category']}}', function(data) {
+          $.each(data['data'], function(index, val) {
+            series.push(val);
+            });
+      
+            $.plot("#my_graph", [{data: series}], options);
+          });         
+        
+        // Niko niko Canvas
         var c=document.getElementById("nikonikocanvas");
         var ctx=c.getContext("2d");
         ctx.font="14px Arial";
         
-        $.getJSON($SCRIPT_ROOT + '/json_data?category={{request.args['category']}}', function(data) {
+        $.getJSON($SCRIPT_ROOT + '/json_nikoniko_data?category={{request.args['category']}}', function(data) {
           var x = 0;
           var y = 0;
           var color_padding = 2;
