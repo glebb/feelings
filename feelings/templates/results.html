@@ -15,14 +15,7 @@
     url_for('static', filename='jquery.flot.time.min.js') }}"></script> 
 <script type="text/javascript" src="{{
     url_for('static', filename='jquery.flot.canvas.min.js') }}"></script> 
-</head>
-<body>
-	<h1>Results</h1>
-  <div id="my_graph" style="width:960px;height:300px"></div>
-  <p>
-  <canvas id="nikonikocanvas" width="1000" height="700"></canvas>  
-  </p>
-
+    
     <script type=text/javascript>
       $(function() {
         
@@ -76,7 +69,16 @@
           });            
         });
       });
-    </script>    
+    </script>        
+</head>
+<body>
+	<h1>Results</h1>
+  <div id="my_graph" style="width:960px;height:300px"></div>
+  <p>
+  <canvas id="nikonikocanvas" width="1000" height="700"></canvas>  
+  </p>
+
+ 
      
 </body>
 </html>

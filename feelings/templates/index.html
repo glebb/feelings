@@ -4,6 +4,36 @@
 <meta charset="UTF-8">
 <title>How is it going?</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+url_for('static', filename='jquery.min.js') }}">\x3C/script>')</script>
+
+<script type=text/javascript>
+  $(function() {
+    $('img#happy').bind('click', function() {
+	    var radio = $('#' + 'rhappy');
+	    radio[0].checked = true;
+      return false;
+    });
+  });
+
+  $(function() {
+    $('img#neutral').bind('click', function() {
+	    var radio = $('#' + 'rneutral');
+	    radio[0].checked = true;
+      return false;
+    });
+  });
+
+  $(function() {
+    $('img#unhappy').bind('click', function() {
+	    var radio = $('#' + 'runhappy');
+	    radio[0].checked = true;
+      return false;
+    });
+  });
+</script>
 </head>
 <body>
 	<h3>{{today}}</h3>
@@ -37,35 +67,6 @@
 	<input type="submit" value="SUBMIT" />
 	</p>
 	</form>
-	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="{{
-  	url_for('static', filename='jquery.min.js') }}">\x3C/script>')</script>
-	
-	<script type=text/javascript>
-	  $(function() {
-	    $('img#happy').bind('click', function() {
-		    var radio = $('#' + 'rhappy');
-		    radio[0].checked = true;
-	      return false;
-	    });
-	  });
 
-	  $(function() {
-	    $('img#neutral').bind('click', function() {
-		    var radio = $('#' + 'rneutral');
-		    radio[0].checked = true;
-	      return false;
-	    });
-	  });
-
-	  $(function() {
-	    $('img#unhappy').bind('click', function() {
-		    var radio = $('#' + 'runhappy');
-		    radio[0].checked = true;
-	      return false;
-	    });
-	  });
-	</script>
 </body>
 </html>
