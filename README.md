@@ -5,7 +5,7 @@ feelings
 
 feelings is a simple tool for gathering information about feelings of people. I have used it daily (part of our daily meetings) with my distributed team. After you have used it for a while, you can identify trends and use the information e.g. in retrospectives.
 
-Live demo: http://displayofpatience.com:8080/
+Live demo: http://www.displayofpatience.net/feelings.fcgi/
 
 feelings is written in Python and Html5, and it saves the data to a simple sqlite db file. It uses http://flask.pocoo.org for server side stuff.
 
